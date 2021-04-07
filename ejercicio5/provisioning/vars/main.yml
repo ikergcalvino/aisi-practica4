@@ -1,0 +1,4 @@
+mysql_user: mysql
+mysql_password: 12345
+mysql_db: wordpress
+ansible_python_interpreter: python3

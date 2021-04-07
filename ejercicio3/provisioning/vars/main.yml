@@ -1,0 +1,9 @@
+# Modify variable admin_username
+admin_username: xxx-aisi2021-user
+admin_password: 12345
+tomcat_url: https://ftp.cixug.es/apache/tomcat/tomcat-8/v8.5.63/bin/apache-tomcat-8.5.63.zip
+tomcat_home: /opt/tomcat/apache-tomcat-8.5.63
+list_of_packages: 
+ - openjdk-8-jdk
+ - unzip
+java_home: /usr/lib/jvm/java-1.8.0-openjdk-amd64
