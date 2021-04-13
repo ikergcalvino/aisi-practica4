@@ -25,9 +25,9 @@ def test():
         pass
 
     if mysql_result:
-        result = Markup('<span style="color: green;">PASS</span>')
+        result = Markup('<span style="color: green;">PASSED</span>')
     else:
-        result = Markup('<span style="color: red;">FAIL</span>')
+        result = Markup('<span style="color: red;">FAILED</span>')
 
     # Return the page with the result.
     return render_template('index.html', result=result, db_uri=db_uri)
