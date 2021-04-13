@@ -12,9 +12,9 @@ app.get('/', function(req, res){
 
     connection.connect(function(err){
         if(!err) {
-            res.send("MariaDB connection status from user "+connection.config.user+": PASSED");
+            res.send("MariaDB connection status from user "+connection.config.user+": PASSED\n");
         } else {
-            res.send("MariaDB connection status from user "+connection.config.user+": FAILED");
+            res.send("MariaDB connection status from user "+connection.config.user+": FAILED\n");
         }
         connection.end();
     });
