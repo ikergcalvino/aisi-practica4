@@ -15,7 +15,13 @@ yum -y localinstall remi-release-7.rpm
 
 # Copy ssh public key
 USER_DIR=/home/vagrant/.ssh
-sed -i '1!d' $USER_DIR/authorized_keys >& /dev/null
+
+if [ ! -f /vagrant/id_rsa.pub ]; then
+	echo "SSH public key does not exist"
+	exit -1
+fi
+
+sed -i "/-aisi/d" .ssh/authorized_keys >& /dev/null
 cat /vagrant/id_rsa.pub >> $USER_DIR/authorized_keys
 chown vagrant:vagrant $USER_DIR/authorized_keys
 chmod 0600 $USER_DIR/authorized_keys >& /dev/null

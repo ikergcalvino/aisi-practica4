@@ -8,9 +8,6 @@ cp /vagrant/ansible.inventory /etc/ansible/hosts
 
 # Create ssh keys
 USER_DIR=/home/vagrant/.ssh
-
-if [ ! -f /vagrant/id_rsa.pub ]; then
-	echo -e 'y\n' | sudo -u vagrant ssh-keygen -t rsa -f $USER_DIR/id_rsa -q -N ''
-	chown vagrant:vagrant $USER_DIR/id_rsa*
-	cp $USER_DIR/id_rsa.pub /vagrant    
-fi
+echo -e 'y\n' | sudo -u vagrant ssh-keygen -t rsa -f $USER_DIR/id_rsa -q -N ''
+chown vagrant:vagrant $USER_DIR/id_rsa*
+cp $USER_DIR/id_rsa.pub /vagrant >& /dev/null
