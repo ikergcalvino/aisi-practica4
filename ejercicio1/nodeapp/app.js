@@ -14,7 +14,7 @@ app.get('/', function(req, res){
         if(!err) {
             res.send("MariaDB connection status from user "+connection.config.user+": PASSED\n");
         } else {
-            res.send("MariaDB connection status from user "+connection.config.user+": FAILED\n");
+            res.send("MariaDB connection status from user "+connection.config.user+": FAILED ("+err+")\n");
         }
         connection.end();
     });
