@@ -26,15 +26,14 @@ cat /vagrant/id_rsa.pub >> $USER_DIR/authorized_keys
 chown vagrant:vagrant $USER_DIR/authorized_keys
 chmod 0600 $USER_DIR/authorized_keys >& /dev/null
 
-iptables -F
-
-# Configure iptables for nodeapp server
+# Configure firewalld for nodeapp server
 if [[ "$HOSTNAME" == *"-nodeapp" ]]; then
-	iptables -A INPUT -s 192.168.100.0/24 -p tcp -m tcp --dport 80 -j ACCEPT
+	firewall-cmd --permanent --add-service=http
 fi
 
-# Configure iptables for database server
+# Configure firewalld for database server
 if [[ "$HOSTNAME" == *"-db" ]]; then
-	iptables -A INPUT -s 192.168.100.0/24 -p tcp -m tcp --dport 3306 -j ACCEPT
+	firewall-cmd --permanent --add-port=3306/tcp
 fi
 
+firewall-cmd --reload
