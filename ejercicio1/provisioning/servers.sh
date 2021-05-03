@@ -21,10 +21,10 @@ if [ ! -f /vagrant/id_rsa.pub ]; then
 	exit -1
 fi
 
-sed -i "/-aisi/d" .ssh/authorized_keys >& /dev/null
+sed -i "/-aisi/d" $USER_DIR/authorized_keys >& /dev/null
 cat /vagrant/id_rsa.pub >> $USER_DIR/authorized_keys
 chown vagrant:vagrant $USER_DIR/authorized_keys
-chmod 0600 $USER_DIR/authorized_keys >& /dev/null
+chmod 0600 $USER_DIR/authorized_keys
 
 # Configure firewalld for nodeapp server
 if [[ "$HOSTNAME" == *"-nodeapp" ]]; then
