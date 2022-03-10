@@ -1,6 +1,4 @@
-# Modify all variables
-webapp_container: xxx-aisi2021-webapp
-db_container: xxx-aisi2021-db
-webapp_img: xxx-aisi2021-webapp-img
-db_img: xxx-aisi2021-db-img
-network: xxx-aisi2021-network
+mysql_user: mysql
+mysql_password: 12345
+mysql_db: wordpress
+ansible_python_interpreter: python3

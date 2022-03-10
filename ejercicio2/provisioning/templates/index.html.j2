@@ -1,9 +1,21 @@
 <html>
-   <head>
-       <title>Welcome to {{ http_host }} !</title>
-   </head>
-   <body>
-	<h1>AISI 2021: Pagina de {{ http_user }}</h1>
-	<h2>Virtual host: {{ http_host }}</h2>
-   </body>
+<head>
+    <meta charset= "utf-8">
+    <title>GEI AISI: Test Page</title>
+    <script type="text/javascript">
+        function getURL() {
+            document.write("URL: " + window.location.href);
+        }
+    </script>
+</head>
+    <body>
+	<div style="width:600px;height:150px;border:1px solid #000;text-align: center;">
+	<strong><br>
+	<u>GEI AISI: 2021/2022</u>
+		<p><script>getURL();</script>
+		<br><br>Página web de {{ http_user }}
+		<br><br>Virtual host: {{ http_host }}</p>
+	</strong>
+	</div>
+    </body>
 </html>

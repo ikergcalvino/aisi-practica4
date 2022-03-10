@@ -1,9 +1,16 @@
 ---
 - hosts: all
-  become: yes
+  become: true
 
   vars_files:
-    - vars/main.yml
+    vars/main.yml
+
+  roles:
+    - geerlingguy.firewall
+    - geerlingguy.mysql
+    - geerlingguy.apache
+    - geerlingguy.php-mysql
+    - geerlingguy.php
 
   tasks:
     - import_tasks: tasks/main.yml

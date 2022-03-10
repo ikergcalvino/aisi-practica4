@@ -1,9 +1,9 @@
 # Application server
 [nodeapp]
-xxx-aisi2021-nodeapp
+xxx-aisi2122-nodeapp
 # Database server
 [db]
-xxx-aisi2021-db
+xxx-aisi2122-db
 # Group 'servers' with nodeapp and db
 [servers:children]
 nodeapp

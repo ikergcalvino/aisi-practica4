@@ -1,10 +1,13 @@
 #!/bin/bash
 
 # Install ansible and other stuff
-yum -y install epel-release python-setuptools wget curl sshpass vim nano ansible
+dnf clean all
+dnf -y install epel-release python3-setuptools wget curl sshpass vim nano ansible
 mkdir -p /etc/ansible
 cp /vagrant/ansible.cfg /etc/ansible
 cp /vagrant/ansible.inventory /etc/ansible/hosts
+chmod 644 /etc/ansible/ansible.cfg
+chmod 644 /etc/ansible/hosts
 
 # Create ssh keys
 USER_DIR=/home/vagrant/.ssh

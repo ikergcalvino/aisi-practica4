@@ -7,7 +7,7 @@ from sqlalchemy import text
 app = Flask(__name__)
 
 # Modify db_host for configuring MySQL connection
-db_host = 'xxx-aisi2021-db'
+db_host = 'xxx-aisi2122-db'
 db_uri = 'mysql://flask:flask@%s/database' % (db_host)
 app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

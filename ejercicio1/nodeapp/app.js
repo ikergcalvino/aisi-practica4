@@ -2,19 +2,23 @@ var express = require('express');
 var mysql = require('mysql');
 var app = express();
 
-app.get('/', function(req, res){
+app.get('/', function(req, res) {
     var connection = mysql.createConnection({
-      host     : "xxx-aisi2021-db",
-      user     : "xxx-aisi2021",
+      host     : "xxx-aisi2122-db",
+      user     : "xxx-aisi2122",
       password : "12345",
-      database : "database"
+      database : "xxx-aisi2122-database"
     });
 
-    connection.connect(function(err){
+    var url = req.protocol + '://' + req.get('host') + req.originalUrl;
+
+    connection.connect(function(err) {
+	var msg = '<h2><u>GEI AISI 2021/2022: Node.js+Express+MariaDB</u>\n<p>URL: ' +url+ '\n<p>MariaDB connection from user ' +connection.config.user+ ': ';
+
         if(!err) {
-            res.send("MariaDB connection status from user "+connection.config.user+": PASSED\n");
+	    res.type('text/html').send(msg+ '<span style="color: green;">PASSED</span>\n');
         } else {
-            res.send("MariaDB connection status from user "+connection.config.user+": FAILED ("+err+")\n");
+            res.type('text/html').send(msg+ '<span style="color: red;">FAILED</span>\n<p>'+err+'\n');
         }
         connection.end();
     });

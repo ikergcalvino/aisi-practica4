@@ -1,37 +1,68 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+require_relative 'provisioning/vbox.rb'
+VBoxUtils.check_version('6.1.32')
+Vagrant.require_version ">= 2.2.19"
+
+# Ansible controller
+ansible_controller_hostname = "xxx-aisi2122-ansible"
+# Application server
+nodeapp_hostname = "xxx-aisi2122-nodeapp"
+# Database server
+db_hostname = "xxx-aisi2122-db"
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "generic/centos7"
-  config.vm.box_version = "3.2.16"
+  config.vm.box = "generic/centos8"
+  config.vm.box_version = "3.6.8"
   config.vm.box_check_update = false
   config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
-  
+
   # Configure hostmanager and vbguest plugins
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
   config.hostmanager.manage_guest = true
-  config.hostmanager.ignore_private_ip = false
   config.vbguest.auto_update = false
 
   # Ansible controller
   config.vm.define "ansible", primary: true do |ansible|
-    ansible.vm.hostname = "xxx-aisi2021-ansible"
-    ansible.vm.network :private_network, ip: "192.168.100.10"
+    ansible.vm.hostname = ansible_controller_hostname
+    ansible.vm.network :private_network, ip: "192.168.56.10"
     ansible.vm.provision "shell", path: "provisioning/ansible-controller.sh"
+
+    ansible.vm.provider :virtualbox do |prov|
+	prov.name = "AISI-P4-EJ1-#{ansible.vm.hostname}"
+        prov.cpus = 1
+        prov.memory = 1024
+        prov.gui = false
+    end
   end
 
   # Application server
   config.vm.define "nodeapp" do |app|
-    app.vm.hostname = "xxx-aisi2021-nodeapp"
-    app.vm.network :private_network, ip: "192.168.100.11"
+    app.vm.hostname = nodeapp_hostname
+    app.vm.network "forwarded_port", guest: 80, host: 8080
+    app.vm.network :private_network, ip: "192.168.56.11"
     app.vm.provision "shell", path: "provisioning/servers.sh"
+
+    app.vm.provider :virtualbox do |prov|
+	prov.name = "AISI-P4-EJ1-#{app.vm.hostname}"
+        prov.cpus = 1
+        prov.memory = 1024
+        prov.gui = false
+    end
   end
 
   # Database server
   config.vm.define "db" do |db|
-    db.vm.hostname = "xxx-aisi2021-db"
-    db.vm.network :private_network, ip: "192.168.100.12"
+    db.vm.hostname = db_hostname
+    db.vm.network :private_network, ip: "192.168.56.12"
     db.vm.provision "shell", path: "provisioning/servers.sh"
+
+    db.vm.provider :virtualbox do |prov|
+	prov.name = "AISI-P4-EJ1-#{db.vm.hostname}"
+        prov.cpus = 1
+        prov.memory = 1024
+        prov.gui = false
+    end
   end
 end
