@@ -1,6 +1,0 @@
-# Modify all variables
-webapp_container: xxx-aisi2122-webapp
-db_container: xxx-aisi2122-db
-webapp_img: xxx-aisi2122-webapp-img
-db_img: xxx-aisi2122-db-img
-network: xxx-aisi2122-network
