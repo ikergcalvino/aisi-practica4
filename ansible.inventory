@@ -1,0 +1,9 @@
+[masters]
+xxx-aisi2223-k8s-master
+[workers]
+xxx-aisi2223-k8s-worker-1
+xxx-aisi2223-k8s-worker-2
+# Group 'cluster' with all nodes
+[cluster:children]
+masters
+workers
