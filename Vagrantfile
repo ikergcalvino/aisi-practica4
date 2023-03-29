@@ -11,8 +11,8 @@ class VagrantPlugins::ProviderVirtualBox::Action::Network
 end
 
 # Hostnames for master and worker nodes
-MASTER_HOSTNAME = "xxx-aisi2223-k8s-master"
-WORKER_HOSTNAME = "xxx-aisi2223-k8s-worker"
+MASTER_HOSTNAME = "idc-aisi2223-k8s-master"
+WORKER_HOSTNAME = "idc-aisi2223-k8s-worker"
 
 # Cluster settings
 MASTER_IP = "192.168.56.10"
