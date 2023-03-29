@@ -1,0 +1,4 @@
+.vagrant/
+output-aisi/
+*.vmdk
+*.pub
