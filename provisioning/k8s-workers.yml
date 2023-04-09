@@ -10,4 +10,3 @@
     - name: Print join command
       debug:
         var: kubernetes_joined_or_not
-

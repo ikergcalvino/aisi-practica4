@@ -38,51 +38,51 @@ Vagrant.configure("2") do |config|
   config.hostmanager.manage_host = true
   config.hostmanager.manage_guest = true
   config.vbguest.auto_update = false
-  
+
   # Master node
   config.vm.define "master", primary: true do |master|
     master.vm.hostname = MASTER_HOSTNAME
     master.vm.network "private_network", ip: MASTER_IP
-    
+
     master.vm.provider "virtualbox" do |prov|
-	prov.name = "AISI-P4-#{master.vm.hostname}"
-        prov.cpus = MASTER_CORES
-        prov.memory = MASTER_MEMORY
-	prov.gui = false
+	    prov.name = "AISI-P4-#{master.vm.hostname}"
+      prov.cpus = MASTER_CORES
+      prov.memory = MASTER_MEMORY
+	    prov.gui = false
     end
-    
+
     # Install and setup K8s using ansible
     master.vm.provision "ansible_local", run: "once" do |ansible|
-	ansible.install = "true"
-	ansible.install_mode = "pip3"
-	ansible.playbook = "provisioning/playbook-main.yml"
-        ansible.inventory_path = "ansible.inventory"
-        ansible.limit = "all"
-	ansible.extra_vars = {
-                master_ip: MASTER_IP,
-                master_hostname: MASTER_HOSTNAME,
-                pod_network: POD_NETWORK,
-            }
+	    ansible.install = "true"
+	    ansible.install_mode = "pip3"
+	    ansible.playbook = "provisioning/playbook-main.yml"
+      ansible.inventory_path = "ansible.inventory"
+      ansible.limit = "all"
+	    ansible.extra_vars = {
+        master_ip: MASTER_IP,
+        master_hostname: MASTER_HOSTNAME,
+        pod_network: POD_NETWORK,
+      }
     end
   end
-  
+
   # Worker nodes
   (1..NUM_WORKERS).each do |i|
     config.vm.define "worker-#{i}" do |worker|
-	worker.vm.hostname = "#{WORKER_HOSTNAME}-#{i}"
-	IP_ADDR = CLUSTER_IP_ADDR.to_s
-        CLUSTER_IP_ADDR = CLUSTER_IP_ADDR.succ
-        worker.vm.network "private_network", ip: IP_ADDR
+	    worker.vm.hostname = "#{WORKER_HOSTNAME}-#{i}"
+	    IP_ADDR = CLUSTER_IP_ADDR.to_s
+      CLUSTER_IP_ADDR = CLUSTER_IP_ADDR.succ
+      worker.vm.network "private_network", ip: IP_ADDR
         
-        worker.vm.provider "virtualbox" do |prov|
-	    prov.name = "AISI-P4-#{worker.vm.hostname}"
-            prov.cpus = WORKER_CORES
-            prov.memory = WORKER_MEMORY
-	    prov.gui = false
-        end
+      worker.vm.provider "virtualbox" do |prov|
+        prov.name = "AISI-P4-#{worker.vm.hostname}"
+        prov.cpus = WORKER_CORES
+        prov.memory = WORKER_MEMORY
+        prov.gui = false
+      end
     end
   end
-  
+
   # Global provisioning bash script
   config.vm.provision "shell", run: "once", path: "provisioning/bootstrap.sh"
 end
