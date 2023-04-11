@@ -29,7 +29,7 @@ CLUSTER_IP_ADDR = CLUSTER_IP_ADDR.succ
 
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/focal64"
-  config.vm.box_version = "20230110.0.0"
+  config.vm.box_version = "20230215.0.0"
   config.vm.box_check_update = false
   config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 
