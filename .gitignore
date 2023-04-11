@@ -1,4 +1,5 @@
 .vagrant/
 output-aisi/
+join-command.sh
 *.vmdk
 *.pub
